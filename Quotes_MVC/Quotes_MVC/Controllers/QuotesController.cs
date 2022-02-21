@@ -25,6 +25,17 @@ namespace Quotes_MVC.Controllers
             return View(await _context.Quotes.ToListAsync());
         }
 
+        // GET: Quotes/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+        public async Task<IActionResult> ShowSearchResult(string SearchPhrases)
+        {
+            return View("Index",await _context.Quotes.Where(j=>j.QuoteAuther.Contains(SearchPhrases)).ToListAsync());
+        }
+
+
         // GET: Quotes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -149,5 +160,7 @@ namespace Quotes_MVC.Controllers
         {
             return _context.Quotes.Any(e => e.Id == id);
         }
+
+
     }
 }
